@@ -22,8 +22,8 @@
     "audit-comic": "tsx src/scripts/feeds/audit-comic.ts",
     "purge-cache": "tsx src/scripts/cloudflare/purge-cache.ts",
     "purge-cache-production": "tsx src/scripts/cloudflare/purge-cache.ts production",
-    "pre-download-comic-stories-height-and-width": "src/scripts/images/start",
-    "build-sitemap": "tsx src/scripts/sitemap/bin/start"
+    "pre-download-comic-stories-height-and-width": "tsx src/scripts/images/start.ts",
+    "build-sitemap": "tsx src/scripts/sitemap/start.ts"
   },
   "author": "Inkverse",
   "license": "AGPL-3.0",
