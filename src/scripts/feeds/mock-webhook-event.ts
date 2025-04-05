@@ -3,7 +3,7 @@ import { get } from "lodash-es";
 import { fileURLToPath, pathToFileURL } from 'url';
 import path from 'path';
 import dotenv from 'dotenv';
-import { TaddyWebhookType, TaddyWebhookAction, TaddyWebhookValidEvents } from '../../shared/taddy/process-webhook.js';
+import { type TaddyWebhookType, type TaddyWebhookAction, type TaddyWebhookValidEvents } from '../../shared/taddy/process-webhook.js';
 import { inkverseApiUrl } from "../../shared/utils/common.js";
 
 import { taddyGraphqlRequest, GET_COMICSERIES_QUERY, GET_COMICISSUE_QUERY, GET_CREATOR_QUERY, GET_CREATORCONTENT_QUERY } from '../../shared/taddy/index.js';
@@ -34,13 +34,13 @@ async function mockWebhookEvent(taddyType: TaddyWebhookType, action: TaddyWebhoo
 
 function getQuery(webhookType: TaddyWebhookType){
   switch(webhookType) {
-    case TaddyWebhookType.COMICSERIES:
+    case 'comicseries':
       return GET_COMICSERIES_QUERY;
-    case TaddyWebhookType.COMICISSUE:
+    case 'comicissue':
       return GET_COMICISSUE_QUERY;
-    case TaddyWebhookType.CREATOR:
+    case 'creator':
       return GET_CREATOR_QUERY;
-    case TaddyWebhookType.CREATORCONTENT:
+    case 'creatorcontent':
       return GET_CREATORCONTENT_QUERY;
     default:
       throw new Error(`ERROR in getQuery: taddyType: ${webhookType} is not supported`);
@@ -49,13 +49,13 @@ function getQuery(webhookType: TaddyWebhookType){
 
 function getDataProperty(taddyType: TaddyWebhookType){
   switch(taddyType) {
-    case TaddyWebhookType.COMICSERIES:
+    case 'comicseries':
       return 'getComicSeries';
-    case TaddyWebhookType.COMICISSUE:
+    case 'comicissue':
       return 'getComicIssue';
-    case TaddyWebhookType.CREATOR:
+    case 'creator':
       return 'getCreator';
-    case TaddyWebhookType.CREATORCONTENT:
+    case 'creatorcontent':
       return 'getCreatorContent';
     default:
       throw new Error(`ERROR in getDataProperty: taddyType: ${taddyType} is not supported`);

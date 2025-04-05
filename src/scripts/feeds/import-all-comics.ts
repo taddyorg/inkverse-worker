@@ -7,7 +7,6 @@ const envPath = path.resolve('.env');
 dotenv.config({ path: envPath });
 
 import { addFeedByUuid } from './add-new-feed-by-uuid.js';
-import { TaddyWebhookType } from '@/shared/taddy/process-webhook.js';
 
 async function run() {
 
@@ -22,7 +21,7 @@ async function run() {
   for await (const line of rl) {
     let comicseries = JSON.parse(line);
     try {
-      await addFeedByUuid(TaddyWebhookType.COMICSERIES, comicseries.uuid);
+      await addFeedByUuid('comicseries', comicseries.uuid);
       await new Promise(resolve => setTimeout(resolve, 10000));
     } catch (error) {
       console.log('error - ', error);

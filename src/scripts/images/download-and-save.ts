@@ -31,7 +31,7 @@ export async function downloadAndSave(outputPath: string): Promise<void> {
         const { uuid, issueUuid, seriesUuid, width, height } = comicstoryWithWidthAndHeight
         if (!uuid || !issueUuid || !seriesUuid || !width || !height) continue
 
-        await ComicStory.updateComicStory(uuid, issueUuid, seriesUuid, width, height)
+        await ComicStory.updateHeightAndWidthForComicStory(uuid, issueUuid, seriesUuid, width, height)
         console.log(`[SYNC] Updated ${uuid} with width ${width} and height ${height}`)
     }
 

@@ -6,11 +6,11 @@ import { fileURLToPath, pathToFileURL } from 'url';
 const envPath = path.resolve('.env');
 dotenv.config({ path: envPath });
 
-import { TaddyWebhookAction, TaddyWebhookType } from '@/shared/taddy/process-webhook.js';
+import { type TaddyWebhookType, type TaddyWebhookAction } from '@/shared/taddy/process-webhook.js';
 import { GET_COMICISSUE_QUERY, GET_COMICSERIES_QUERY, GET_COMICSERIES_WITH_CREATOR_QUERY, GET_COMICSERIES_WITH_ISSUES_QUERY, GET_CREATOR_QUERY, GET_CREATOR_WITH_CONTENT_QUERY, GET_CREATORCONTENT_QUERY, taddyGraphqlRequest } from '@/shared/taddy/index.js';
 import { createMockWebhookEvent, sendMockEventToEndpointUrl } from './mock-webhook-event.js';
 
-export async function addFeedByUuid(taddyType: TaddyWebhookType, uuid: string, action: TaddyWebhookAction = TaddyWebhookAction.CREATED) {
+export async function addFeedByUuid(taddyType: TaddyWebhookType, uuid: string, action: TaddyWebhookAction = 'created') {
   const parentQuery = getQuery(taddyType);
   const parentVariables = { uuid };
   const parentData = await taddyGraphqlRequest(parentQuery, parentVariables);
@@ -53,7 +53,7 @@ export async function addFeedByUuid(taddyType: TaddyWebhookType, uuid: string, a
     const creators = get(creatorsData, getChildrenProperty('comicseries-with-creator'), []);
 
     for await (const creator of creators) {
-      addFeedByUuid(TaddyWebhookType.CREATOR, creator.uuid, action);
+      addFeedByUuid('creator', creator.uuid, action);
     }
   }
 }
@@ -96,9 +96,9 @@ function getChildQuery(taddyType: string){
 function getChildTaddyType(taddyType: string): TaddyWebhookType {
   switch(taddyType) {
     case 'comicseries':
-      return TaddyWebhookType.COMICISSUE;
+      return 'comicissue';
     case 'creator':
-      return TaddyWebhookType.CREATORCONTENT;
+      return 'creatorcontent';
     default:
       throw new Error(`ERROR in getChildTaddyType: taddyType: ${taddyType} is not supported`);
   }
