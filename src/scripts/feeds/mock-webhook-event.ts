@@ -77,10 +77,10 @@ function createMockWebhookEvent(data: Record<string, any>, taddyType: TaddyWebho
 }
 
 async function sendMockEventToEndpointUrl(mockEvent: Record<string, any>) {
-  const webhookEndpointUrl = process.env.WEBHOOK_ENDPOINT_URL;
+  const webhookEndpointUrl = process.env.TADDY_WEBHOOK_ENDPOINT_URL;
 
   if (!webhookEndpointUrl) {
-    throw new Error('WEBHOOK_ENDPOINT_URL is not set');
+    throw new Error('TADDY_WEBHOOK_ENDPOINT_URL is not set');
   }else if (!process.env.TADDY_WEBHOOK_SECRET) {
     throw new Error('TADDY_WEBHOOK_SECRET is not set');
   }
