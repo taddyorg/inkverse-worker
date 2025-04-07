@@ -1,6 +1,7 @@
 FROM node:20.17
 
-RUN mkdir app
+# Create and use /app
+WORKDIR /app
 
 RUN apt-get update -y && apt-get upgrade -y
 
@@ -15,13 +16,11 @@ COPY package.json yarn.lock /app/
 COPY src/public/package.json /app/src/public/
 COPY src/shared/package.json /app/src/shared/
 
-WORKDIR /app
-
-# Install dependencies including workspace packages
+# Install dependencies
 RUN $HOME/.yarn/bin/yarn install
 
-# Copy the rest of the application
-COPY . /app
+# Copy the rest of the application (after deps)
+COPY . .
 
 ENV NODE_ENV=production
 

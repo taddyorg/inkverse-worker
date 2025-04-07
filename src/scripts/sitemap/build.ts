@@ -137,7 +137,7 @@ class KnexTransform extends Transform {
 
         const camelCaseDoc = mapKeys(doc, (_, key) => camelCase(key));
         const type = this.table;
-        const inkverseUrl = getInkverseUrl({ type: type as InkverseUrlType, shortUrl: camelCaseDoc.shortUrl});
+        const inkverseUrl = `https://inkverse.co/${getInkverseUrl({ type: type as InkverseUrlType, shortUrl: camelCaseDoc.shortUrl})}`;
 
         // Convert timestamp to desired format
         const formattedDate = getFormattedDate(type, camelCaseDoc.sitemapDatePublished, camelCaseDoc.sitemapDateCreated);
