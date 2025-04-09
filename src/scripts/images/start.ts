@@ -15,9 +15,10 @@ async function main(args: string[]) {
         await downloadAndSave(outputPath);
 
         //remove the file
-        // await unlink(outputPath)
+        await unlink(outputPath)
 
         console.log('[run-scheduler] Program finished.');
+        process.exit(0);
     } catch (error) {
         console.error('Error:', error);
         process.exit(1);

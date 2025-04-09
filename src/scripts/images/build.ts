@@ -30,8 +30,9 @@ export async function build(table: string, pk: string, outputPath: string) {
             SELECT
                 cs.uuid, cs.issue_uuid, cs.series_uuid, cs.story_image 
             FROM comicstory cs
+            JOIN comicissue ci ON ci.uuid = cs.issue_uuid
             WHERE
-                id between ${min} and ${max} AND (is_removed IS NULL OR is_removed = false) AND (width IS NULL OR height IS NULL)
+                cs.id between ${min} and ${max} AND (cs.is_removed IS NULL OR cs.is_removed = false) AND (cs.width IS NULL OR cs.height IS NULL) AND (ci.scopes_for_exclusive_content IS NULL OR (ci.scopes_for_exclusive_content IS NOT NULL AND ci.date_exclusive_content_is_available < EXTRACT(EPOCH FROM NOW()) * 1000))
             `;
     };
 
