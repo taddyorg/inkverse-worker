@@ -31,7 +31,7 @@ export async function build(table: string, pk: string, outputPath: string) {
                 cs.uuid, cs.issue_uuid, cs.series_uuid, cs.story_image 
             FROM comicstory cs
             WHERE
-                id between ${min} and ${max} AND (is_removed = true OR is_removed IS NULL) AND (width IS NULL OR height IS NULL)
+                id between ${min} and ${max} AND (is_removed IS NULL OR is_removed = false) AND (width IS NULL OR height IS NULL)
             `;
     };
 

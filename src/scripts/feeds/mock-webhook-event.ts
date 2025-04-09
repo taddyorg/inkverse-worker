@@ -12,14 +12,6 @@ const envPath = path.resolve('.env');
 dotenv.config({ path: envPath });
 
 async function mockWebhookEvent(taddyType: TaddyWebhookType, action: TaddyWebhookAction, uuid: string){
-
-  //check if graphql API is running
-  try {
-    await axios.get(`${inkverseApiUrl}/healthcheck`);
-  }catch(error){
-    throw new Error('You need to have the API running to send a webhook event. Go to the graphql-server directory and run "yarn dev" then try again.');
-  }
-
   const query = getQuery(taddyType);
   const variables = { uuid };
 
