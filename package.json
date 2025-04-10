@@ -22,8 +22,8 @@
     "mock-webhook-event": "tsx src/scripts/feeds/mock-webhook-event.ts",
     "import-all-comics": "tsx src/scripts/feeds/import-all-comics.ts",
     "audit-comic": "tsx src/scripts/feeds/audit-comic.ts",
-    "purge-cache": "tsx src/scripts/cloudflare/purge-cache.ts",
-    "purge-cache-production": "tsx src/scripts/cloudflare/purge-cache.ts production",
+    "purge-cache": "tsx src/scripts/cache/delete.ts",
+    "purge-cache-production": "NODE_ENV=production tsx src/scripts/cache/delete.ts everything",
     "pre-download-comic-stories-height-and-width": "tsx src/scripts/images/start.ts",
     "build-sitemap": "tsx src/scripts/sitemap/start.ts"
   },
